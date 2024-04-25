@@ -20,6 +20,8 @@
 FROM almalinux:8.9
 # RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y sudo python2-pip wget nmap-ncat jq java-11-openjdk
+# python2安装完成后只有pip2和python2到pip2.7和python2.7的软连接，这里创建pip 和 python的软连接
+RUN ln -s /usr/bin/pip2.7 /usr/bin/pip && ln -s /usr/bin/python2.7 /usr/bin/python
 RUN pip install robotframework
 # RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
 # dumb-init 更换成支持ppc64le的版本，Dockerfile的主要修改就是这里
